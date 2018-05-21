@@ -8,6 +8,7 @@ public class BackTrackingSudokuSolver implements SudokuSolver {
     public boolean solve(final SudokuBoard board) {
         int ii = 0;
         if (Cell.getTerminate()) {
+            Cell.resetCell();
             return true;
         }
 

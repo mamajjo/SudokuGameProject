@@ -1,6 +1,6 @@
 import org.junit.Assert;
 
-public class CloneTests {
+public class CloneAndCompareTests {
 
     @org.junit.Test
     public void isCopiedBoardIsTheSameAsSourceBoard_sholdBeEqual() { // for the same objects should return true

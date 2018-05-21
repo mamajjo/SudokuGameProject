@@ -6,31 +6,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
-public class SudokuBoard implements Serializable {
-    public static int dimension = 9;
+public class SudokuBoard implements Serializable, Cloneable {
+    public static final int dimension = 9;
     private List<SudokuField> sudokuFields;
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("sudokuFields", sudokuFields)
-                .toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SudokuBoard that = (SudokuBoard) o;
-        return Objects.equal(sudokuFields, that.sudokuFields);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(sudokuFields);
-    }
-    //methods
+    Random random = new Random();
 
     public SudokuBoard() {
         sudokuFields = Arrays.asList(new SudokuField[dimension * dimension]);
@@ -42,6 +23,7 @@ public class SudokuBoard implements Serializable {
         }
 
     }
+
 
     public SudokuBoard(List<SudokuField> fromFile){
         sudokuFields = fromFile;
@@ -62,15 +44,21 @@ public class SudokuBoard implements Serializable {
         return sudokuFields;
     }
 
-//    public SudokuField[][] getBoardCopy() { // return copy of the board
-//        SudokuField[][] copyToReturn = new SudokuField[sudokuFields.length][sudokuFields.length];
-//        for (int i = 0; i < sudokuFields.length; i++) {
-//            for (int j = 0; j < sudokuFields.length; i++) {
-//                copyToReturn[i][j].setFieldValue(getField(i, j));
-//            }
-//        }
-//        return copyToReturn;
-//    }
+    public void zeroNumberOfFields(int number){
+        int temp;
+        List<Integer> fieldsToZero = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            temp = random.nextInt(dimension*dimension);
+            if (fieldsToZero.contains(temp)){
+                i--;
+                continue;
+            }
+            fieldsToZero.add(temp);
+        }
+        for (int i = 0; i < fieldsToZero.size(); i++) {
+            sudokuFields.set(fieldsToZero.get(i), new SudokuField(0));
+        }
+    }
 
     public SudokuJoint getRow(int r) {
         int row = r * dimension;
@@ -160,6 +148,38 @@ public class SudokuBoard implements Serializable {
         }
         return true;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        SudokuBoard cloneSudokuBoard = new SudokuBoard();
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                cloneSudokuBoard.setField(i, j, this.getField(i, j));
+            }
+        }
+        return cloneSudokuBoard;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("sudokuFields", sudokuFields)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuBoard that = (SudokuBoard) o;
+        return Objects.equal(sudokuFields, that.sudokuFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(sudokuFields);
+    }
+    //methods
 
 
 }

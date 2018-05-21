@@ -60,4 +60,21 @@ public class SudokuBoardTest {
         Assert.assertEquals(b1.getField(1, 1), 1);
     }
 
+    @org.junit.Test
+    public void checkZeroing_shouldBeOk(){
+        Cell.resetCell();
+        SudokuBoard b4 = new SudokuBoard();
+        SudokuSolver solverTest = new BackTrackingSudokuSolver();
+        solverTest.solve(b4);
+        int expectedNumberOfZero = 20;
+        b4.zeroNumberOfFields(expectedNumberOfZero);
+        int numberOfZeroFields = 0;
+        for (int i = 0; i < SudokuBoard.dimension; i++) {
+            for (int j = 0; j < SudokuBoard.dimension; j++) {
+                if (b4.getField(i,j) == 0 )  numberOfZeroFields++;
+            }
+        }
+        Assert.assertTrue(numberOfZeroFields == expectedNumberOfZero);
+    }
+
 }

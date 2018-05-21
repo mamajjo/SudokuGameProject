@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class SudokuField implements Serializable {
+public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int fieldValue;
 
     public SudokuField() {
@@ -10,7 +10,6 @@ public class SudokuField implements Serializable {
     public SudokuField(int value) {
         this.fieldValue = value;
     }
-
 
     public int getFieldValue() {
         return fieldValue;
@@ -48,5 +47,12 @@ public class SudokuField implements Serializable {
                 .toHashCode();
     }
 
-
+    @Override
+    public int compareTo(SudokuField o) {
+        if (this.getFieldValue() > o.getFieldValue())
+            return 1;
+        if (this.getFieldValue() < o.getFieldValue())
+            return -1;
+        return 0;
+    }
 }

@@ -2,12 +2,13 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import org.apache.commons.collections4.list.FixedSizeList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SudokuJoint {
+public class SudokuJoint implements Cloneable {
 
     private List<SudokuField> fields;
 
@@ -43,7 +44,6 @@ public class SudokuJoint {
         return fields;
     }
 
-
     public boolean verify() {
         List<Integer> possibilites = IntStream.rangeClosed(1, SudokuBoard.dimension).boxed().collect(Collectors.toList());
         for (int i = 0; i < SudokuBoard.dimension; i++) {
@@ -62,5 +62,16 @@ public class SudokuJoint {
         return true;
     }
 
-
+    @Override
+    protected SudokuJoint clone() throws CloneNotSupportedException {
+        List<SudokuField> tempFields = Arrays.asList(new SudokuField[SudokuBoard.dimension]);
+        tempFields = FixedSizeList.fixedSizeList(tempFields);
+        for (int i = 0; i < tempFields.size(); i++) {
+            tempFields.set(i, new SudokuField(0));
+        }
+        for (int i = 0; i < SudokuBoard.dimension; i++) {
+            tempFields.get(i).setFieldValue(this.getFields().get(i).getFieldValue());
+        }
+        return new SudokuJoint(tempFields);
+    }
 }

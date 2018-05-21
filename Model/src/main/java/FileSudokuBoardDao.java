@@ -25,12 +25,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>,AutoCloseable {
     }
 
     @Override
-    public void write(SudokuBoard board) {
+    public void write(SudokuBoard board) throws IOException {
         try {
             writer = new ObjectOutputStream(new FileOutputStream(path));
             writer.writeObject(board);
         } catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 

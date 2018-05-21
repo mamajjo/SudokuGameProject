@@ -1,8 +1,258 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SudokuBoardController">
+   <children>
+      <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="55.0" layoutY="74.0" prefHeight="476.0" prefWidth="543.0" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="70.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field0" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field9" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field18" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field1" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field10" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field19" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field2" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field11" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field20" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field3" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field12" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field21" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field4" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field13" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field22" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field5" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field14" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field23" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field6" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field15" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field24" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field7" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field16" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field25" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field8" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field17" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field26" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field27" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field36" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field45" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field28" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field37" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field46" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field29" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field38" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field47" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field30" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field39" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field48" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field31" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field40" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field49" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field32" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field41" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field50" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field33" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field42" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field51" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field34" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field43" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field52" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field35" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field44" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field53" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field54" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field63" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field72" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field55" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field64" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field73" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field56" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field65" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field74" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field57" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field66" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field75" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field58" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field67" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field76" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field59" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field68" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field77" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field60" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field69" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field78" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field61" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field70" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field79" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="159.0" prefWidth="66.0">
+                     <children>
+                        <Button fx:id="field62" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field71" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                        <Button fx:id="field80" mnemonicParsing="false" prefHeight="50.0" prefWidth="66.0" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <Button fx:id="startingGame" layoutX="64.0" layoutY="606.0" mnemonicParsing="false" onAction="#setUpButtons" text="StartTheGame" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="493.0" AnchorPane.topAnchor="606.0" />
+   </children>
+</AnchorPane>

@@ -4,15 +4,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
+
+    static SudokuBoard board;
+    static Stage window;
+
+
+
+    public void setUpScene(int width, int height, String path) throws IOException {
+//        String fxmlWelcome = "welcome.fxml";
+        Parent panel = FXMLLoader.load(getClass().getResource(path));
+        window.setScene(new Scene(panel,width,height));
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello Sudoku");
-        primaryStage.setScene(new Scene(root, 300, 275));
-
-        primaryStage.show();
+        board = new SudokuBoard();
+        SudokuSolver solver = new BackTrackingSudokuSolver();
+        solver.solve(board);
+        Main.window = primaryStage;
+        //welcomescene
+        setUpScene(400, 600,"welcome.fxml");
+        window.show();
     }
 
 
