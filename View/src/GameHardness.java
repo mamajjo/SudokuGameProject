@@ -6,7 +6,7 @@ public enum GameHardness {
     void setHardness(SudokuBoard board){
         switch (this){
             case EASY:
-                board.zeroNumberOfFields(25);
+                board.zeroNumberOfFields(2);
                 break;
             case MEDIUM:
                 board.zeroNumberOfFields(40);

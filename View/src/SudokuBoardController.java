@@ -1,12 +1,17 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.collections4.Get;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuBoardController {
+public class SudokuBoardController implements EventHandler<ActionEvent> {
 
     @FXML
     private Button field0;
@@ -251,6 +256,12 @@ public class SudokuBoardController {
     @FXML
     private Button field80;
 
+    @FXML
+    private Button startingGame;
+
+    @FXML
+    private Button endGame;
+
     List<Button> fields = new ArrayList<Button>();
 
     void addButtons() {
@@ -335,13 +346,37 @@ public class SudokuBoardController {
         fields.add(field78);
         fields.add(field79);
         fields.add(field80);
+
+
     }
 
-    public void setUpButtons(){
+    public void setUpButtons() {
         addButtons();
         for (int i = 0; i < fields.size(); i++) {
             fields.get(i).setText(String.valueOf(Main.board.getBoard().get(i).getFieldValue()));
         }
+        for (int i = 0; i < fields.size(); i++) {
+            if (Main.board.getBoard().get(i).getFieldValue() != 0)
+                fields.get(i).setDisable(true);
+        }
+        startingGame.setDisable(true);
+        for (Button but : fields) {
+            but.setOnAction(this);
+        }
+        endGame.setOnAction(e -> System.exit(0));
+
     }
 
+    // obsługa wypełniania formularza
+    @Override
+    public void handle(ActionEvent event) {
+        int index = 0;
+        for (Button but : fields) {
+            if (event.getSource() == but) {
+                GetUserInputBox.insertValue("ValueBox", "Try to pass valid value", Main.board.getBoard().get(index));
+                fields.get(index).setText(String.valueOf(Main.board.getBoard().get(index).getFieldValue()));
+            } else
+                index++;
+        }
+    }
 }
