@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Welcome {
+public class Welcome{
 
     private void setScene() throws IOException {
         Parent panel = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -46,6 +48,15 @@ public class Welcome {
 
     @FXML
     private Button exitButton;
+
+    @FXML
+    private Button loadGameButton;
+
+    @FXML
+    void loadGame(ActionEvent event) throws IOException  {
+        Main.board = Main.fsbd.read();
+        setScene();
+    }
 
     public void setExitButton(){
         System.exit(0);

@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.apache.commons.collections4.Get;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,7 +263,35 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
     @FXML
     private Button endGame;
 
-    List<Button> fields = new ArrayList<Button>();
+    @FXML
+    private Button saveGame;
+
+    @FXML
+    void saveGame(ActionEvent event){
+        Main.fsbd = SudokuBoardDaoFactory.getFileDao("/Users/Maciej/Documents/Uczelnia/IVsemestr/SudokuGameProject/Model/src/main/resources/fields.txt");
+        try {
+            Main.fsbd.write(Main.board);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Button checkGameButton;
+
+    @FXML
+    void checkGame(ActionEvent event) {
+        if(Main.board.checkBoard()) {
+            System.out.printf("Congratulations!");
+            Main.window.close();
+        }
+        else
+        {
+            System.out.printf("Something has gone wrong");
+        }
+    }
+
+    public static List<Button> fields = new ArrayList<Button>();
 
     void addButtons() {
         fields.add(field0);
@@ -373,7 +402,7 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
         int index = 0;
         for (Button but : fields) {
             if (event.getSource() == but) {
-                GetUserInputBox.insertValue("ValueBox", "Try to pass valid value", Main.board.getBoard().get(index));
+                GetUserInputBox.insertValue("ValueBox", "Try to pass valid value", Main.board.getBoard().get(index), index);
                 fields.get(index).setText(String.valueOf(Main.board.getBoard().get(index).getFieldValue()));
             } else
                 index++;

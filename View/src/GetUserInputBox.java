@@ -15,11 +15,11 @@ public class GetUserInputBox{
     private static Button continueButton = new Button();
     private static Button cancelButton = new Button();
 
-    public static void insertValue(String title, String message, SudokuField sudokuField) {
+    public static void insertValue(String title, String message, SudokuField sudokuField, int index) {
         final Stage window = new Stage();
         window.setTitle(title);
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setMinWidth(200);
+        window.setMinWidth(400);
 
         Label info = new Label();
         info.setText(message);
@@ -33,12 +33,17 @@ public class GetUserInputBox{
         continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                boolean isPassedNumberValid = false;
-                while(!isPassedNumberValid) {
-                    isPassedNumberValid = Main.board.isNumberValid(Integer.parseInt(textField.getText()));
+                sudokuField.setFieldValue(0);
+                SudokuBoardController.fields.get(index).setText("0");
+                Cell.setCell(index/ SudokuBoard.dimension,index% SudokuBoard.dimension);
+                if (!(Main.board.isNumberValid(Integer.parseInt(textField.getText())))) {
+                    textField.setText("You entered wrong value to the cell");
+                    Main.board.showFieldsBoard();
+                    }
+                    else {
+                    sudokuField.setFieldValue(Integer.parseInt(textField.getText()));
+                    window.close();
                 }
-                sudokuField.setFieldValue(Integer.parseInt(textField.getText()));
-                window.close();
             }
         });
 

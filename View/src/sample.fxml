@@ -254,6 +254,8 @@
          </children>
       </GridPane>
       <Button fx:id="startingGame" layoutX="64.0" layoutY="606.0" mnemonicParsing="false" onAction="#setUpButtons" text="StartTheGame" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="493.0" AnchorPane.topAnchor="606.0" />
-      <Button fx:id="endGame" layoutX="502.0" layoutY="612.0" mnemonicParsing="false" onAction="#setUpButtons" text="End Game" />
+      <Button fx:id="endGame" layoutX="502.0" layoutY="656.0" mnemonicParsing="false" onAction="#setUpButtons" text="End Game" />
+      <Button fx:id="saveGame" layoutX="390.0" layoutY="606.0" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
+      <Button fx:id="checkGameButton" layoutX="499.0" layoutY="606.0" mnemonicParsing="false" onAction="#checkGame" text="Check Board" />
    </children>
 </AnchorPane>
