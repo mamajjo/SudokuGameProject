@@ -1,6 +1,8 @@
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import org.apache.commons.collections4.list.FixedSizeList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -94,21 +96,25 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuJoint(boxToReturn);
     }
 
-    public void showFieldsBoard() {
+    public String showFieldsBoard() {
         int index = 0;
+        StringBuilder message = new StringBuilder("\n");
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 if (j == 3 | j == 6) {
-                    System.out.print("|");
+                    message.append("|");
                 }
                 index = i * dimension + j;
-                System.out.print("  " + sudokuFields.get(index).getFieldValue() + "  ");
+                message.append(" ");
+                message.append(sudokuFields.get(index).getFieldValue());
+                message.append(" ");
             }
-            System.out.println("");
+            message.append("\n");
             if (i == 2 || i == 5) {
-                System.out.println("---------------------------------------------");
+                message.append("------------------------------\n");
             }
         }
+        return message.toString();
     }
 
 

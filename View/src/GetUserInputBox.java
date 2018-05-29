@@ -10,8 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
-public class GetUserInputBox{
+public class GetUserInputBox {
+    private static final Logger logger = LogManager.getLogger(GetUserInputBox.class);
     private static Button continueButton = new Button();
     private static Button cancelButton = new Button();
 
@@ -30,27 +34,45 @@ public class GetUserInputBox{
         TextField textField = new TextField("Pass value to the cell");
 
         continueButton.setText("Press after passing a value above!");
+
         continueButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sudokuField.setFieldValue(0);
                 SudokuBoardController.fields.get(index).setText("0");
-                Cell.setCell(index/ SudokuBoard.dimension,index% SudokuBoard.dimension);
-                if (!(Main.board.isNumberValid(Integer.parseInt(textField.getText())))) {
-                    textField.setText("You entered wrong value to the cell");
-                    Main.board.showFieldsBoard();
+                Cell.setCell(index / SudokuBoard.dimension, index % SudokuBoard.dimension);
+                System.out.println(textField.getText());
+                if (
+                        textField.getText().equals("1") ||
+                                textField.getText().equals("2") ||
+                                textField.getText().equals("3") ||
+                                textField.getText().equals("4") ||
+                                textField.getText().equals("5") ||
+                                textField.getText().equals("6") ||
+                                textField.getText().equals("7") ||
+                                textField.getText().equals("8") ||
+                                textField.getText().equals("9"))
+                {
+                    if (!(Main.board.isNumberValid(Integer.parseInt(textField.getText())))) {
+                        textField.setText("You entered wrong value to the cell");
+                        logger.log(Level.INFO, "Wrong value was provided to the cell");
+                    } else {
+                        sudokuField.setFieldValue(Integer.parseInt(textField.getText()));
+                        logger.log(Level.INFO, "User input is valid: input");
+                        window.close();
                     }
-                    else {
-                    sudokuField.setFieldValue(Integer.parseInt(textField.getText()));
-                    window.close();
+                } else
+                    {
+                    textField.setText("Enter value between 1-9");
+                    logger.log(Level.INFO, "User input is invalid");
                 }
             }
         });
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(info, textField,continueButton, cancelButton);
+        layout.getChildren().addAll(info, textField, continueButton, cancelButton);
         layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout,200,200);
+        Scene scene = new Scene(layout, 200, 200);
         window.setScene(scene);
         window.showAndWait();
 

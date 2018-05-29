@@ -1,29 +1,53 @@
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
-    private int fieldValue;
+    private transient IntegerProperty fieldValue = new SimpleIntegerProperty();
+    //private int fieldValue;
 
     public SudokuField() {
-        this.fieldValue = 0;
+        this.fieldValue.setValue(0);
     }
 
-    public SudokuField(int value) {
-        this.fieldValue = value;
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+        s.writeInt(fieldValue.getValue());
     }
 
-    public int getFieldValue() {
+    public IntegerProperty fieldValueProperty() {
         return fieldValue;
     }
 
+    //todo
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        fieldValue = new SimpleIntegerProperty();
+        s.defaultReadObject();
+        this.fieldValue.setValue(s.readInt());
+
+    }
+
+    public SudokuField(int value) {
+        this.fieldValue.setValue(value);
+    }
+
+    public int getFieldValue() {
+        return fieldValue.getValue();
+    }
+
     public void setFieldValue(int fieldValue) {
-        this.fieldValue = fieldValue;
+        this.fieldValue.setValue(fieldValue);
     }
 
 
     @Override
     public String toString() {
         return "SudokuField{" +
-                "fieldValue=" + fieldValue +
+                "fieldValue=" + fieldValue.getValue() +
                 '}';
     }
 
@@ -36,14 +60,14 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
         SudokuField that = (SudokuField) o;
 
         return new org.apache.commons.lang3.builder.EqualsBuilder()
-                .append(fieldValue, that.fieldValue)
+                .append(fieldValue.getValue(), that.fieldValue.getValue())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37)
-                .append(fieldValue)
+                .append(fieldValue.getValue())
                 .toHashCode();
     }
 

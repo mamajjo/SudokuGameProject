@@ -9,10 +9,14 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 
 public class Welcome{
+    private static final Logger logger = LogManager.getLogger(Welcome.class);
 
     private void setScene() throws IOException {
         Parent panel = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -55,6 +59,7 @@ public class Welcome{
     @FXML
     void loadGame(ActionEvent event) throws IOException  {
         Main.board = Main.fsbd.read();
+        logger.log(Level.INFO, "Game has been loaded from file");
         setScene();
     }
 
@@ -64,14 +69,17 @@ public class Welcome{
 
     public void setEasyButton() throws IOException {
         GameHardness.EASY.setHardness(Main.board);
+        logger.log(Level.INFO, "Easy game has been chosen");
         setScene();
     }
     public void setMediumButton() throws IOException {
         GameHardness.MEDIUM.setHardness(Main.board);
+        logger.log(Level.INFO, "medium game has been chosen");
         setScene();
     }
     public void setHardButton() throws IOException {
         GameHardness.HARD.setHardness(Main.board);
+        logger.log(Level.INFO, "hard game has been chosen");
         setScene();
     }
 

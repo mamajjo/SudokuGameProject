@@ -12,6 +12,11 @@ public class SerializationTests {
             fsbd.write(expectedBoard);
             actualBoard = fsbd.read();
         } catch (Exception e) {
+            try {
+                throw new NotFoundException("Nie znaleziono pliku: testy", e);
+            } catch (NotFoundException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
         Assert.assertEquals(expectedBoard, actualBoard);

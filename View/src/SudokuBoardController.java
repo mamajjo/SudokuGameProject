@@ -1,11 +1,17 @@
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
+import jdk.nashorn.internal.runtime.NumberToString;
 import org.apache.commons.collections4.Get;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -13,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuBoardController implements EventHandler<ActionEvent> {
-
+    private static final Logger logger = LogManager.getLogger(SudokuBoardController.class);
     @FXML
     private Button field0;
 
@@ -267,12 +273,17 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
     private Button saveGame;
 
     @FXML
-    void saveGame(ActionEvent event){
+    void saveGame(ActionEvent event) {
         Main.fsbd = SudokuBoardDaoFactory.getFileDao("/Users/Maciej/Documents/Uczelnia/IVsemestr/SudokuGameProject/Model/src/main/resources/fields.txt");
         try {
             Main.fsbd.write(Main.board);
+            logger.log(Level.INFO, "Game saved");
         } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                throw new NotFoundException("Nie znaleziono pliku: okienko", e);
+            } catch (NotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -281,13 +292,12 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
 
     @FXML
     void checkGame(ActionEvent event) {
-        if(Main.board.checkBoard()) {
-            System.out.printf("Congratulations!");
+        if (Main.board.checkBoard()) {
+            logger.log(Level.INFO, "Congratulations");
+            logger.log(Level.INFO,Main.board.showFieldsBoard());
             Main.window.close();
-        }
-        else
-        {
-            System.out.printf("Something has gone wrong");
+        } else {
+            logger.log(Level.INFO, "Something has gone wrong");
         }
     }
 
@@ -376,13 +386,12 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
         fields.add(field79);
         fields.add(field80);
 
-
     }
 
     public void setUpButtons() {
         addButtons();
         for (int i = 0; i < fields.size(); i++) {
-            fields.get(i).setText(String.valueOf(Main.board.getBoard().get(i).getFieldValue()));
+            Bindings.bindBidirectional(fields.get(i).textProperty(), Main.board.getBoard().get(i).fieldValueProperty(), new NumberStringConverter());
         }
         for (int i = 0; i < fields.size(); i++) {
             if (Main.board.getBoard().get(i).getFieldValue() != 0)
@@ -393,19 +402,17 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
             but.setOnAction(this);
         }
         endGame.setOnAction(e -> System.exit(0));
-
     }
 
-    // obsługa wypełniania formularza
     @Override
     public void handle(ActionEvent event) {
         int index = 0;
         for (Button but : fields) {
             if (event.getSource() == but) {
                 GetUserInputBox.insertValue("ValueBox", "Try to pass valid value", Main.board.getBoard().get(index), index);
-                fields.get(index).setText(String.valueOf(Main.board.getBoard().get(index).getFieldValue()));
             } else
                 index++;
         }
     }
+
 }

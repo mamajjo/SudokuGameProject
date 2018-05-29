@@ -21,16 +21,6 @@ public class SudokuBoardTest {
     }
 
     @org.junit.Test
-    public void checkIfCellIsTerminated_ShouldBeTrue() {
-        SudokuBoard b1 = new SudokuBoard();
-        Cell.resetCell();
-        SudokuSolver solver = new BackTrackingSudokuSolver();
-        boolean solved1 = solver.solve(b1);
-        Assert.assertTrue(Cell.getTerminate());
-    }
-
-
-    @org.junit.Test
     public void setTwoCellsWithSameNumber_checkBoardShouldFail() {
         SudokuBoard b1 = new SudokuBoard();
         SudokuSolver solver = new BackTrackingSudokuSolver();

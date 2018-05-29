@@ -1,3 +1,7 @@
+import org.apache.logging.log4j.LogManager;
+
+import java.util.logging.Logger;
+
 public enum GameHardness {
     EASY,
     MEDIUM,
