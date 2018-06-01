@@ -274,17 +274,20 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
 
     @FXML
     void saveGame(ActionEvent event) {
-        Main.fsbd = SudokuBoardDaoFactory.getFileDao("/Users/Maciej/Documents/Uczelnia/IVsemestr/SudokuGameProject/Model/src/main/resources/fields.txt");
+//        Main.fsbd = SudokuBoardDaoFactory.getFileDao("/Users/Maciej/Documents/Uczelnia/IVsemestr/SudokuGameProject/Model/src/main/resources/fields.txt");
+//        try {
+//            Main.fsbd.write(Main.board);
+//            logger.log(Level.INFO, "Game saved");
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
         try {
-            Main.fsbd.write(Main.board);
-            logger.log(Level.INFO, "Game saved");
-        } catch (IOException e) {
-            try {
-                throw new NotFoundException("Nie znaleziono pliku: okienko", e);
-            } catch (NotFoundException e1) {
-                e1.printStackTrace();
-            }
+            Main.jsbd.write(Main.board);
+            logger.log(Level.INFO, "Game saved into the DB");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     @FXML
@@ -294,7 +297,7 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
     void checkGame(ActionEvent event) {
         if (Main.board.checkBoard()) {
             logger.log(Level.INFO, "Congratulations");
-            logger.log(Level.INFO,Main.board.showFieldsBoard());
+            logger.log(Level.INFO, Main.board.showFieldsBoard());
             Main.window.close();
         } else {
             logger.log(Level.INFO, "Something has gone wrong");
@@ -394,8 +397,14 @@ public class SudokuBoardController implements EventHandler<ActionEvent> {
             Bindings.bindBidirectional(fields.get(i).textProperty(), Main.board.getBoard().get(i).fieldValueProperty(), new NumberStringConverter());
         }
         for (int i = 0; i < fields.size(); i++) {
-            if (Main.board.getBoard().get(i).getFieldValue() != 0)
+            if (Main.board.getBoard().get(i).getFieldValue() == 0) {
+                Main.board.getBoard().get(i).setChangable(true);
+            }
+        }
+        for (int i = 0; i < fields.size(); i++) {
+            if (Main.board.getBoard().get(i).isChangable() == false) {
                 fields.get(i).setDisable(true);
+            }
         }
         startingGame.setDisable(true);
         for (Button but : fields) {

@@ -11,7 +11,7 @@ public class Main extends Application {
     static SudokuBoard board;
     static Stage window;
     static FileSudokuBoardDao fsbd = SudokuBoardDaoFactory.getFileDao("/Users/Maciej/Documents/Uczelnia/IVsemestr/SudokuGameProject/Model/src/main/resources/fields.txt");
-
+    static JdbcSudokuBoardDao jsbd = SudokuBoardDaoFactory.getDataBaseDao();
 
 
     public void setUpScene(int width, int height, String path) throws IOException {

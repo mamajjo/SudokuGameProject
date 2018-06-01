@@ -8,6 +8,15 @@ import java.io.Serializable;
 
 public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private transient IntegerProperty fieldValue = new SimpleIntegerProperty();
+    private boolean changable = false;
+
+    public void setChangable(boolean changable) {
+        this.changable = changable;
+    }
+
+    public boolean isChangable() {
+        return changable;
+    }
     //private int fieldValue;
 
     public SudokuField() {
@@ -44,6 +53,11 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
     }
 
 
+    public Integer changableState(){
+        if (isChangable())
+            return 1;
+        else return 0;
+    }
     @Override
     public String toString() {
         return "SudokuField{" +

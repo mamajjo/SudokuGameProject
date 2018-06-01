@@ -58,9 +58,19 @@ public class Welcome{
 
     @FXML
     void loadGame(ActionEvent event) throws IOException  {
-        Main.board = Main.fsbd.read();
-        logger.log(Level.INFO, "Game has been loaded from file");
-        setScene();
+//        Main.board = Main.fsbd.read();
+//        logger.log(Level.INFO, "Game has been loaded from file");
+//        setScene();
+        try {
+            Main.board = Main.jsbd.read();
+            if (Main.board == null){
+                logger.log(Level.FATAL, "Program failed to load board properly");
+            }
+            logger.log(Level.INFO,"Game has been loaded from the DB");
+            setScene();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setExitButton(){

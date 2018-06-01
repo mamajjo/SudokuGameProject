@@ -17,11 +17,11 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>,AutoCloseable {
             reader = new ObjectInputStream(new FileInputStream(path));
             toReturn = (SudokuBoard) reader.readObject();
         } catch (IOException e) {
-            try {
-                throw new NotFoundException("Nie znaleziono pliku", e);
-            } catch (NotFoundException e1) {
-                e1.printStackTrace();
-            }
+//            try {
+//                throw new NotFoundException("Nie znaleziono pliku", e);
+//            } catch (NotFoundException e1) {
+//                e1.printStackTrace();
+//            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
